@@ -1,6 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><title>Javascript Bits and Pieces</title></head>
+<head>
+<meta charset="UTF-8">
+<title>Javascript Bits and Pieces</title>
+<link href="./css/js.css" rel="stylesheet" type="text/css"/>
+</head>
 <body>
+
+<section id="sec1">
+	<h2>get padding, letter count, and vowels</h2>
+	
+	<div class="padding-element">
+		"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+	</div>
+	<p class="results">Padding in this container is: <span class="pad"></span></p>
+	<p class="results">There are <span class="letters"></span> letters.</p>
+	<p class="results"><span class="vowels"></span> vowels.</p>
+</section>
+
+<script>
+	"use strict"
+	
+	let pad = document.querySelector(".pad"),
+			letters = document.querySelector(".letters"),
+			vowels = document.querySelector(".vowels"),
+			sec1 = document.querySelector("#sec1"),
+			content = document.querySelector('.padding-element').innerHTML
+
+class Section {
+
+	getPadding(p){
+		let sec1padding = window.getComputedStyle(p, null).getPropertyValue('padding');
+		pad.innerHTML = sec1padding;
+	}
+	getLetters(l){
+		let i = 0, c = 0, v = 0;
+		let ltrs = l.split("");
+					
+				for(i;i<ltrs.length;i++){
+						if(ltrs[i].match(/[a-z]/i)){
+							++c
+								if(ltrs[i].match(/[aeiou]/i)){
+										++v
+								}
+						}
+					}
+
+		letters.innerHTML = '' + c + '';
+		vowels.innerHTML = '' + v + '';
+	}
+}
+const section = new Section;
+
+section.getPadding(sec1);
+section.getLetters(content);
+</script>
 </body>
 </html>
